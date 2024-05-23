@@ -11,11 +11,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 
-import javax.mail.Address;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.Part;
+import jakarta.mail.Address;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.Multipart;
+import jakarta.mail.Part;
 
 /**
  * A representation of a Mail Message.

@@ -127,7 +127,7 @@ public class HtmlCodeWriter {
 		// Parse the raw text to a JavaSource object
 
 		Class<?> sourceParserClass = LoadersManager.getInstance().getLoader().loadClass("de.java2html.javasource.JavaSourceParser");
-		Object sourceParser = sourceParserClass.newInstance();
+		Object sourceParser = sourceParserClass.getDeclaredConstructor().newInstance();
 		Method parseMethod = sourceParserClass.getMethod("parse", File.class);
 		if (parseMethod == null) {
 			return "";

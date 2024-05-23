@@ -57,7 +57,7 @@ public class BeanDefaultsExtractor {
 				return;
 			}
 			Class<?> c = Class.forName(className);
-			Object o = c.newInstance();
+			Object o = c.getDeclaredConstructor().newInstance();
 			String[]classProperties = new String[args.length -1];
 			System.arraycopy(args, 1, classProperties, 0, classProperties.length);
 			Properties properties = new Properties();

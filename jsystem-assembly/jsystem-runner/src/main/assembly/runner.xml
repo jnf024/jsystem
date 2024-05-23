@@ -1,7 +1,7 @@
 <assembly
-	xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+	xmlns="https://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+	xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 https://maven.apache.org/xsd/assembly-1.1.2.xsd">
 	<formats>
 		<format>tar.gz</format>
 		<format>zip</format>
@@ -127,6 +127,12 @@
 				<include>*:jackson-annotations:*</include>
 				<include>*:jackson-core:*</include>
 				<include>*:difido-reports-common:*</include>
+				<include>*:jaxb-api:*</include>
+				<include>*:jaxb-core:*</include>
+				<include>*:jaxb-impl:*</include>
+				<include>*:jakarta.activation-api:*</include>
+				<include>*:jakarta.xml.bind-api:*</include>
+				<include>*:jakarta.mail-api:*</include>
 			</includes>
 		</dependencySet>
 		<dependencySet>

@@ -1112,7 +1112,7 @@ public class RunnerTest implements JTest, UIHandler {
 					try {
 						String[] args = useProvider.config();
 						provider = (ParameterProvider) LoadersManager.getInstance().getLoader()
-								.loadClass(useProvider.provider().getName()).newInstance();
+								.loadClass(useProvider.provider().getName()).getDeclaredConstructor().newInstance();
 						provider.setProviderConfig(args);
 					} catch (Exception e) {
 						log.log(Level.WARNING, "Fail to create new instance of provider", e);
@@ -1137,7 +1137,7 @@ public class RunnerTest implements JTest, UIHandler {
 										.getClassLoader()
 										.loadClass(
 												"jsystem.extensions.paramproviders.StringArrayOptionsParameterProvider")
-										.newInstance();
+										.getDeclaredConstructor().newInstance();
 							} catch (Exception e) {
 								throw new RuntimeException(e);
 							}

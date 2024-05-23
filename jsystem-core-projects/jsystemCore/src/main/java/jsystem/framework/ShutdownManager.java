@@ -34,7 +34,7 @@ public class ShutdownManager {
 				Thread t;
 				try {
 					c = Class.forName(threads[i]);
-					t = (Thread) c.newInstance();
+					t = (Thread) c.getDeclaredConstructor().newInstance();
 					Runtime.getRuntime().addShutdownHook(t);
 				} catch (Throwable e) {
 					log.log(Level.WARNING, "Fail to load thread", e);

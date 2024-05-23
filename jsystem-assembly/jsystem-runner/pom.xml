@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.jsystemtest</groupId>
 		<artifactId>jsystem-parent</artifactId>
-		<version>6.1.13-SNAPSHOT</version>
+		<version>6.22-SNAPSHOT</version>
 		<relativePath>../../jsystem-parent</relativePath>
 	</parent>
 	<artifactId>jsystem-runner</artifactId>
@@ -19,14 +19,21 @@
 			<type>zip</type>
 		</dependency>
 		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
+			<groupId>jakarta.mail</groupId>
+			<artifactId>jakarta.mail-api</artifactId>
 		</dependency>
-		<dependency>
+<!--		<dependency>
 			<groupId>commons-httpclient</groupId>
 			<artifactId>commons-httpclient</artifactId>
+		</dependency>-->
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
 		</dependency>
-
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpmime</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>xalan</groupId>
 			<artifactId>xalan</artifactId>
@@ -36,10 +43,15 @@
 			<groupId>jython</groupId>
 			<artifactId>jython</artifactId>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>jfree</groupId>
 			<artifactId>jfreechart</artifactId>
+		</dependency>-->
+		<dependency>
+		    <groupId>org.jfree</groupId>
+		    <artifactId>jfreechart</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>commons-jxpath</groupId>
 			<artifactId>commons-jxpath</artifactId>
@@ -48,10 +60,18 @@
 			<groupId>asm</groupId>
 			<artifactId>asm</artifactId>
 		</dependency>
+<!--		<dependency>
+		    <groupId>org.ow2.asm</groupId>
+		    <artifactId>asm</artifactId>
+		</dependency>-->
 		<dependency>
 			<groupId>asm</groupId>
 			<artifactId>asm-commons</artifactId>
 		</dependency>
+<!--		<dependency>
+		    <groupId>org.ow2.asm</groupId>
+		    <artifactId>asm-commons</artifactId>
+		</dependency>-->
 		<dependency>
 			<groupId>ant-contrib</groupId>
 			<artifactId>ant-contrib</artifactId>
@@ -77,11 +97,6 @@
 			<artifactId>comm</artifactId>
 			<!-- type>pom</type -->
 		</dependency>
-		<!-- dependency> <groupId>org.apache.ftpserver</groupId> <artifactId>ftpserver-core</artifactId> 
-			<version>1.0.0</version> </dependency> <dependency> <groupId>org.apache.ftpserver</groupId> 
-			<artifactId>ftplet-api</artifactId> <version>1.0.0</version> </dependency> 
-			<dependency> <groupId>org.apache.ftpserver</groupId> <artifactId>ftpserver-deprecated</artifactId> 
-			<version>1.0.0-M2</version> </dependency -->
 		<dependency>
 			<groupId>org.apache.ftpserver</groupId>
 			<artifactId>ftpserver-core</artifactId>
@@ -143,22 +158,22 @@
 			<artifactId>FileTransfer</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>org.jsystemtest.systemobjects</groupId>
 			<artifactId>embeddedCatalina</artifactId>
 			<version>${project.version}</version>
-		</dependency>
+		</dependency>-->
 		<dependency>
 			<groupId>org.jsystemtest</groupId>
 			<artifactId>jsystemAgent</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		<dependency>
+<!--		<dependency>
 			<groupId>org.jsystemtest</groupId>
 			<artifactId>jsystemApp</artifactId>
 			<version>${project.version}</version>
-		</dependency>
-		<dependency>
+		</dependency>-->
+		<!--<dependency>
 			<groupId>org.jsystemtest</groupId>
 			<artifactId>jsystem-services-so</artifactId>
 			<version>${project.version}</version>
@@ -173,7 +188,7 @@
 			<artifactId>jsystem-services-tests</artifactId>
 			<version>${project.version}</version>
 			<classifier>sources</classifier>
-		</dependency>
+		</dependency>-->
 
 
 	</dependencies>

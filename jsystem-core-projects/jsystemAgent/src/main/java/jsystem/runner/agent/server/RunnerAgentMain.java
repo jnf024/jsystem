@@ -3,11 +3,8 @@
  */
 package jsystem.runner.agent.server;
 
-import java.lang.management.ManagementFactory;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.management.MBeanServer;
 
 import jsystem.framework.FrameworkOptions;
 import jsystem.framework.JSystemProperties;
@@ -15,12 +12,7 @@ import jsystem.framework.common.CommonResources;
 import jsystem.framework.launcher.StartRunner;
 import jsystem.framework.scenario.RunningProperties;
 import jsystem.framework.sut.SutFactory;
-import jsystem.runner.agent.MBeanNames;
 import jsystem.utils.FileLock;
-
-
-import com.aqua.filetransfer.ftp.FTPServer;
-import com.ignis.embeddedcatalina.EmbeddedCatalina;
 
 /**
  * @author goland

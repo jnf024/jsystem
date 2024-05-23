@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -301,12 +302,15 @@ public class RunnerListenersManager extends DefaultReporterImpl implements JSyst
 	}
 
 	/**
+	 * @throws SecurityException 
+	 * @throws NoSuchMethodException 
+	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException 
 	 * 
 	 */
-	private void loadReporter(String className) throws ClassNotFoundException, IllegalAccessException,
-			InstantiationException {
+	private void loadReporter(String className) throws Exception {
 		Class<?> reporterClass = LoadersManager.getInstance().getLoader().loadClass(className);
-		Object currentObject = reporterClass.newInstance();
+		Object currentObject = reporterClass.getDeclaredConstructor().newInstance();
 		addListener(currentObject);
 	}
 

@@ -544,7 +544,7 @@ public class Parameter {
 	public Parameter cloneParameter() {
 		Parameter param;
 		try {
-			param = (Parameter) getClass().newInstance();
+			param = (Parameter) getClass().getDeclaredConstructor().newInstance();
 		} catch (Exception e) {
 			param = new Parameter();
 		}

@@ -4,7 +4,7 @@
 	<parent>	
 		<groupId>org.jsystemtest</groupId>
 		<artifactId>jsystem-parent</artifactId>
-		<version>6.1.13-SNAPSHOT</version>	
+		<version>6.22-SNAPSHOT</version>	
 		<relativePath>../../jsystem-parent</relativePath>
 	</parent>
 	<artifactId>jsystemAgent</artifactId>
@@ -18,12 +18,6 @@
 			<groupId>org.jsystemtest.systemobjects</groupId>
 			<artifactId>FileTransfer</artifactId>
 			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jsystemtest.systemobjects</groupId>
-			<artifactId>embeddedCatalina</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		
+		</dependency>	
 	</dependencies>
 </project>

@@ -124,7 +124,7 @@ public class BeanUtils {
 							try {
 								String[] args = useProvider.config();
 								ParameterProvider provider = (ParameterProvider) LoadersManager.getInstance()
-										.getLoader().loadClass(useProvider.provider().getName()).newInstance();
+										.getLoader().loadClass(useProvider.provider().getName()).getDeclaredConstructor().newInstance();
 								provider.setProviderConfig(args);
 								beanElement.setParameterProvider(provider);
 							} catch (Exception e) {
@@ -147,7 +147,7 @@ public class BeanUtils {
 							if (optionsMethod != null) {
 								beanElement.setHasOptions(true);
 								try {
-									Object[] array = (Object[]) optionsMethod.invoke(reflectClass.newInstance());
+									Object[] array = (Object[]) optionsMethod.invoke(reflectClass.getDeclaredConstructor().newInstance());
 									if (array != null) {
 										String[] options = new String[array.length];
 										for (int optionIndex = 0; optionIndex < array.length; optionIndex++) {
@@ -308,7 +308,7 @@ public class BeanUtils {
 	 * @throws Exception
 	 */
 	public static Object propertiesToObject(Class<?> clazz, HashMap<String, String> properties) throws Exception {
-		Object objectInstance = clazz.newInstance();
+		Object objectInstance = clazz.getDeclaredConstructor().newInstance();
 		ArrayList<BeanElement> beans = getBeans(clazz, false, true, getBasicTypes());
 		for (BeanElement currentBeanElement : beans) {
 			invoke(objectInstance, currentBeanElement.getSetMethod(), properties.get(currentBeanElement.getName()),
@@ -425,6 +425,8 @@ public class BeanUtils {
 			}
 		case USER_DEFINED:
 			return value;
+		default:
+			break;
 		}
 		return value;
 	}
@@ -559,8 +561,8 @@ public class BeanUtils {
 		}
 		Object instance = null;
 		try {
-			instance = clazz.newInstance();
-		} catch (InstantiationException | IllegalAccessException e) {
+			instance = clazz.getDeclaredConstructor().newInstance();
+		} catch (Exception e) {
 			return null;
 		}
 		return type.cast(instance);

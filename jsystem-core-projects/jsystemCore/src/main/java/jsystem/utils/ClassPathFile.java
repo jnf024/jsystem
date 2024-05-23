@@ -95,8 +95,13 @@ public class ClassPathFile {
 			return null;
 		}
 		ZipEntry entry = zipFile.getEntry(fileName);
-		if (entry == null)
+		if (entry == null) {
+			try {
+				zipFile.close();
+			} catch (IOException e) {
+			}
 			return null;
+		}
 		int size = (int) entry.getSize();
 		try {
 			stream = zipFile.getInputStream(entry);
@@ -112,6 +117,8 @@ public class ClassPathFile {
 			log.log(Level.WARNING, "Fail to load data from jar: " + archive.getPath(), e);
 		} finally {
 			try {
+				if (zipFile != null)
+					zipFile.close();
 				if (stream != null)
 					stream.close();
 			} catch (IOException e) {
@@ -170,9 +177,10 @@ public class ClassPathFile {
 			String path = (String) fPathItems.elementAt(i);
 			Enumeration<? extends ZipEntry> enum1;
 			if (isJar(path)) {
-				// System.out.println(path);
-				ZipFile zf = new ZipFile(path);
-				enum1 = zf.entries();
+				try (// System.out.println(path);
+				ZipFile zf = new ZipFile(path)) {
+					enum1 = zf.entries();
+				}
 				while (enum1.hasMoreElements()) {
 					String entry = ((ZipEntry) enum1.nextElement()).getName();
 					if (dirFile.equals((new File(entry)).getParentFile())) {
@@ -198,22 +206,23 @@ public class ClassPathFile {
 		if (!file.exists()){
 			throw new FileNotFoundException("File not found: " + jarFullPath);
 		}
-		JarFile jarFile = new JarFile(jarFullPath);
-		ZipEntry manifestEntry = jarFile.getEntry("META-INF/MANIFEST.MF");
-		if (manifestEntry == null) {
-			return "";
-		}
-		InputStream in = jarFile.getInputStream(manifestEntry);
-		try {
-			Properties p = new Properties();
-			p.load(in);
-			Object ver = p.get("Specification-Version");
-			if (ver == null || StringUtils.isEmpty(ver.toString())) {
-				ver = p.get("Implementation-Version");
+		try (JarFile jarFile = new JarFile(jarFullPath)) {
+			ZipEntry manifestEntry = jarFile.getEntry("META-INF/MANIFEST.MF");
+			if (manifestEntry == null) {
+				return "";
 			}
-			return ver == null || StringUtils.isEmpty(ver.toString()) ? "":ver.toString();
-		}finally{
-			in.close();
+			InputStream in = jarFile.getInputStream(manifestEntry);
+			try {
+				Properties p = new Properties();
+				p.load(in);
+				Object ver = p.get("Specification-Version");
+				if (ver == null || StringUtils.isEmpty(ver.toString())) {
+					ver = p.get("Implementation-Version");
+				}
+				return ver == null || StringUtils.isEmpty(ver.toString()) ? "":ver.toString();
+			}finally{
+				in.close();
+			}
 		}
 	}
 }

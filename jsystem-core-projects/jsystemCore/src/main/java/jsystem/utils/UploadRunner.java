@@ -4,19 +4,24 @@
 package jsystem.utils;
 
 import java.io.File;
+import java.net.URI;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.impl.client.HttpClients;
+
 import jsystem.framework.FrameworkOptions;
 import jsystem.framework.JSystemProperties;
 
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.httpclient.methods.multipart.FilePart;
-import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
-import org.apache.commons.httpclient.methods.multipart.Part;
+
 
 /**
  * use this class to upload log files to http server (instead of ftp server)
@@ -33,7 +38,7 @@ public class UploadRunner {
 
 	private File logDir;
 
-	private PostMethod filePost;
+	private HttpPost filePost;
 
 	private static Logger log = Logger.getLogger(UploadRunner.class.getName());
 
@@ -103,7 +108,7 @@ public class UploadRunner {
 	 */
 	public static boolean validateUrl(String url) {
 		try {
-			URL _url = new URL(url);
+			URL _url = new URI(url).toURL();
 			_url.openConnection().connect();
 			return true;
 		} catch (Exception e) {
@@ -119,34 +124,34 @@ public class UploadRunner {
 	 * @throws Exception
 	 */
 	public void upload() throws Exception {
-		filePost = new PostMethod(serverUrl);
+		filePost = new HttpPost(serverUrl);
 
 		/**
 		 * create multipart request
 		 */
 		try {
 			File targetFile = new File(filePath);
-			Part[] parts = { new FilePart(targetFile.getName(), targetFile) };
-
-			filePost.setRequestEntity(new MultipartRequestEntity(parts, filePost.getParams()));
-
-			HttpClient client = new HttpClient();
-
-			client.getHttpConnectionManager().getParams().setConnectionTimeout(5000);
+			HttpEntity entity = MultipartEntityBuilder.create()
+					.addBinaryBody(targetFile.getName(), targetFile)
+					.build();
+			filePost.setEntity(entity);
+			
+			RequestConfig config = RequestConfig.custom().setConnectTimeout(5000).build();
+			HttpClient client = HttpClients.custom().setDefaultRequestConfig(config).build();
 
 			/**
 			 * send request
 			 */
-			int status = client.executeMethod(filePost);
+			HttpResponse response = client.execute(filePost);
 
 			/**
 			 * upload fail
 			 */
+			int status = response.getStatusLine().getStatusCode();
 			if (status != HttpStatus.SC_OK) {
 
 				throw new Exception("Publish error : fail upload files to " + serverUrl + " \n\n"
 						+ "Unable upload file " + filePath + "\n" + "HTTP Status " + status + "\n");
-
 			}
 		}
 		/**

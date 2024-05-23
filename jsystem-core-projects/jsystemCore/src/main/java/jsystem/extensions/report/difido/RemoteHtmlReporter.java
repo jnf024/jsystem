@@ -7,7 +7,6 @@ import il.co.topq.difido.model.test.TestDetails;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -120,7 +119,7 @@ public class RemoteHtmlReporter extends AbstractHtmlReporter {
 		}
 		details = new ExecutionDetails(description, useSharedExecution);
 		details.setForceNew(forceNewExecution);
-		details.setExecutionProperties(new HashMap<>(properties));
+		details.setExecutionProperties(properties);
 		return client.addExecution(details);
 	}
 

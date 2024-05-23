@@ -160,9 +160,9 @@ public class XmlReporter implements ExtendTestReporter, ExtendTestListener, SutL
 			report.setAttribute("message", String.valueOf(message));
 		}
 		report.setAttribute("status", isPass);
-		report.setAttribute("bold", (new Boolean(bold)).toString());
-		report.setAttribute("html", (new Boolean(html)).toString());
-		report.setAttribute("link", (new Boolean(link)).toString());
+		report.setAttribute("bold", String.valueOf(bold));
+		report.setAttribute("html", String.valueOf(html));
+		report.setAttribute("link", String.valueOf(link));
 		report.setAttribute("time", Long.toString(System.currentTimeMillis()));
 		return report;
 	}

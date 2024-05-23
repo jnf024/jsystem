@@ -190,19 +190,20 @@ class GeneralCollector {
 	}
 	
 	private void processJar(File jarFile, Hashtable<String, String> result) throws Exception{
-		ZipFile zipFile = new ZipFile(jarFile);
-		Enumeration<? extends ZipEntry> enties = zipFile.entries();
-		while (enties.hasMoreElements()){
-			if(Thread.interrupted()){
-				throw new InterruptedException();
-			}
-			ZipEntry entry = (ZipEntry)enties.nextElement();
-			if(entry.isDirectory()){
-				continue;
-			}
-			if (isTestClass("/" + entry.getName())) {
-				String className= classNameFromFile("/" + entry.getName());
-				result.put(className, className);
+		try (ZipFile zipFile = new ZipFile(jarFile)) {
+			Enumeration<? extends ZipEntry> enties = zipFile.entries();
+			while (enties.hasMoreElements()){
+				if(Thread.interrupted()){
+					throw new InterruptedException();
+				}
+				ZipEntry entry = (ZipEntry)enties.nextElement();
+				if(entry.isDirectory()){
+					continue;
+				}
+				if (isTestClass("/" + entry.getName())) {
+					String className= classNameFromFile("/" + entry.getName());
+					result.put(className, className);
+				}
 			}
 		}
 	}

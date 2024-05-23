@@ -415,6 +415,8 @@ public class ParametersManager {
 				case DOUBLE:
 					value = NumberUtils.getRandomDoubleValueInRange(start, end);
 					break;
+				default:
+					break;
 				}
 			}else if (key.indexOf("(")>=0){ // choose from a group of values
 				index = key.indexOf("(");
@@ -442,6 +444,8 @@ public class ParametersManager {
 			break;
 		case ENVIRONMENT:
 			value = System.getenv(key);
+			break;
+		default:
 			break;
 		}
 

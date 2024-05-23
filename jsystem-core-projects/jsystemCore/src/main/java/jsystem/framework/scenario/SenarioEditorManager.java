@@ -20,7 +20,7 @@ public class SenarioEditorManager {
 		if (duplicatorClassName == null) {
 			duplicatorClassName = "jsystem.treeui.exceleditor.ExcelScenarioEditor";
 		}
-		duplicator = (ScenarioEditor) Class.forName(duplicatorClassName).newInstance();
+		duplicator = (ScenarioEditor) Class.forName(duplicatorClassName).getDeclaredConstructor().newInstance();
 		return duplicator;
 	}
 }

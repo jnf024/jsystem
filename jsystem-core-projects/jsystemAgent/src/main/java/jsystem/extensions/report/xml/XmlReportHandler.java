@@ -28,17 +28,16 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import jsystem.framework.FrameworkOptions;
-import jsystem.framework.JSystemProperties;
-import jsystem.runner.agent.reportdb.TestInfo;
-import jsystem.utils.StringUtils;
-
 import org.apache.xpath.XPathAPI;
-import org.jfree.util.Log;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import jsystem.framework.FrameworkOptions;
+import jsystem.framework.JSystemProperties;
+import jsystem.runner.agent.reportdb.TestInfo;
+import jsystem.utils.StringUtils;
 
 /**
  * Give information about the run from the xml files
@@ -263,7 +262,7 @@ public class XmlReportHandler implements ReportInformation {
 			reportFile0 = getReportFile(0);
 			doc = initDocument(getReportFile(0));
 		} catch (Exception e) {
-			Log.error("Failed to update property " + attributeName, e);
+			log.log(Level.SEVERE, "Failed to update property " + attributeName, e);
 			return;
 		}
 
@@ -282,7 +281,7 @@ public class XmlReportHandler implements ReportInformation {
 			final Source input = new DOMSource(doc);
 			transformer.transform(input, output);
 		} catch (Exception e) {
-			Log.error("Failed to update sut name", e);
+			log.log(Level.SEVERE ,"Failed to update sut name", e);
 		} finally {
 			if (os != null) {
 				try {

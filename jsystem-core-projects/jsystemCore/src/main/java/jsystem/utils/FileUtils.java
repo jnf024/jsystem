@@ -3,7 +3,6 @@
  */
 package jsystem.utils;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.Closeable;
@@ -41,7 +40,6 @@ import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-import java.util.zip.ZipOutputStream;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -53,11 +51,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import jsystem.framework.FrameworkOptions;
-import jsystem.framework.JSystemProperties;
-import jsystem.utils.exec.Command;
-import jsystem.utils.exec.Execute;
-
 import org.apache.commons.compress.archivers.ArchiveEntry;
 import org.apache.commons.compress.archivers.ArchiveOutputStream;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
@@ -67,6 +60,11 @@ import org.apache.tools.tar.TarEntry;
 import org.apache.tools.tar.TarInputStream;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import jsystem.framework.FrameworkOptions;
+import jsystem.framework.JSystemProperties;
+import jsystem.utils.exec.Command;
+import jsystem.utils.exec.Execute;
 
 public class FileUtils {
 
@@ -363,12 +361,13 @@ public class FileUtils {
 	 * @throws Exception
 	 */
 	public static byte[] readBytes(File file) throws Exception {
-		FileInputStream fis = new FileInputStream(file);
-		byte[] fileData = new byte[fis.available()];
-		for (int i = 0; i < fileData.length; i++) {
-			fileData[i] = (byte) fis.read();
+		try (FileInputStream fis = new FileInputStream(file)) {
+			byte[] fileData = new byte[fis.available()];
+			for (int i = 0; i < fileData.length; i++) {
+				fileData[i] = (byte) fis.read();
+			}
+			return fileData;
 		}
-		return fileData;
 	}
 
 	/**
@@ -588,28 +587,6 @@ public class FileUtils {
 					collectTo.addElement(list[i]);
 				}
 			}
-		}
-	}
-
-	private static void addZipEntry(ZipOutputStream zipOut, File zipIn, File root) throws IOException {
-
-		BufferedInputStream inStream = new BufferedInputStream(new FileInputStream(zipIn));
-		byte buffer[] = new byte[1024];
-		int length;
-		// replace of file separator is a fix for 1783
-		// so zip created on windows will be extracted on linux and vice versa
-		String zipEntryName = replaceSeparator(zipIn.getPath().substring(root.getPath().length() + 1));
-		zipOut.putNextEntry(new ZipEntry(zipEntryName));
-
-		try {
-			length = inStream.read(buffer);
-			while (length != -1) {
-				zipOut.write(buffer, 0, length);
-				length = inStream.read(buffer);
-			}
-		} finally {
-			zipOut.closeEntry();
-			inStream.close();
 		}
 	}
 
@@ -1161,22 +1138,23 @@ public class FileUtils {
 		String line;
 		FileInputStream fis = new FileInputStream(fileName);
 		BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
-		RandomAccessFile raf = new RandomAccessFile(fileName, "rw");
-		int lineCounter = 0;
-		while ((line = reader.readLine()) != null) {
-			int originalLineLength = line.length();
-			if (lineCounter == lineIndex) {
-				line = line.replaceFirst(lookFor, replaceWith);
-				if (line.length() > originalLineLength) {
-					throw new RuntimeException("Attempt to replace text with a longer text is not supported");
+		try (RandomAccessFile raf = new RandomAccessFile(fileName, "rw")) {
+			int lineCounter = 0;
+			while ((line = reader.readLine()) != null) {
+				int originalLineLength = line.length();
+				if (lineCounter == lineIndex) {
+					line = line.replaceFirst(lookFor, replaceWith);
+					if (line.length() > originalLineLength) {
+						throw new RuntimeException("Attempt to replace text with a longer text is not supported");
+					}
 				}
+				raf.write((line + "\n").getBytes());
+				lineCounter++;
 			}
-			raf.write((line + "\n").getBytes());
-			lineCounter++;
+			reader.close();
+			raf.setLength(raf.getFilePointer());
+			raf.close();
 		}
-		reader.close();
-		raf.setLength(raf.getFilePointer());
-		raf.close();
 	}
 
 	/**
@@ -1242,9 +1220,9 @@ public class FileUtils {
 			@Override
 			public int compare(File o1, File o2) {
 				if (earliestFirst) {
-					return new Long(o1.lastModified()).compareTo(new Long(o2.lastModified()));
+					return Long.valueOf(o1.lastModified()).compareTo(Long.valueOf(o2.lastModified()));
 				} else {
-					return new Long(o2.lastModified()).compareTo(new Long(o1.lastModified()));
+					return Long.valueOf(o2.lastModified()).compareTo(Long.valueOf(o1.lastModified()));
 				}
 			}
 		});

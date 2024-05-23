@@ -105,7 +105,7 @@ public class SwingUtils {
 	/**
 	 * 
 	 */
-	public static void setToolBarComboBoxLAF(JComboBox box){
+	public static void setToolBarComboBoxLAF(JComboBox<?> box){
 		box.setOpaque(false);
 		box.setPreferredSize(new Dimension(100, 20));
 		box.setRenderer(new MyComboBoxRenderer());
@@ -124,7 +124,7 @@ class MyComboBoxRenderer extends BasicComboBoxRenderer {
 
 	private static final long serialVersionUID = 1L;
 
-	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
+	public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected,
 			boolean cellHasFocus) {
 		if (isSelected) {
 			setBackground(list.getSelectionBackground());

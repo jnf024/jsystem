@@ -46,7 +46,7 @@ public class JUnit4TestAdapterForJSystem implements Test {
 	public String getFullUUID()  {
 		if (SystemTest.class.isAssignableFrom(testClass)) {
 			try {
-				return ((SystemTest)testClass.newInstance()).getFullUUID();
+				return ((SystemTest)testClass.getDeclaredConstructor().newInstance()).getFullUUID();
 			} catch (Exception e) {
 				return "";
 			}

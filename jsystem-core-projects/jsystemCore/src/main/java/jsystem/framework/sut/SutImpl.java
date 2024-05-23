@@ -209,7 +209,7 @@ public class SutImpl implements Sut {
 		try{
 			Class<?> reporterClass = LoadersManager.getInstance().getLoader().loadClass(reader);
 			if (reporterClass != null){
-				Object instance = reporterClass.newInstance();
+				Object instance = reporterClass.getDeclaredConstructor().newInstance();
 				if (instance instanceof SutReader){
 					log.log(Level.INFO,"Sut reader : " + reader + " Was loaded.");
 					sutReader = (SutReader) instance;
@@ -257,7 +257,7 @@ public class SutImpl implements Sut {
 				for(String validatorString: validatorsStringArray){
 					try {
 						Class<?> c = LoadersManager.getInstance().getLoader().loadClass(validatorString);
-						validators.add((SutValidator)c.newInstance());
+						validators.add((SutValidator)c.getDeclaredConstructor().newInstance());
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

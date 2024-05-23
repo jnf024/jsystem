@@ -176,7 +176,7 @@ public class RunnerSOTest extends RunnerTest {
 								.getClassLoader()
 								.loadClass(
 										"jsystem.extensions.paramproviders.StringArrayOptionsParameterProvider")
-								.newInstance();
+								.getDeclaredConstructor().newInstance();
 					} catch (Exception e) {
 						throw new RuntimeException(e);
 					}

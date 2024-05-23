@@ -173,7 +173,7 @@ public class SystemManagerImpl implements SystemObjectManager, TestListener {
 
             Class<?> c = LoadersManager.getInstance().getLoader().loadClass(className); 
 
-            systemObject =  (SystemObject)c.newInstance();
+            systemObject =  (SystemObject)c.getDeclaredConstructor().newInstance();
         }
         if(systemObject instanceof SystemObjectImpl){
         	((SystemObjectImpl)systemObject).sut = usedSut;

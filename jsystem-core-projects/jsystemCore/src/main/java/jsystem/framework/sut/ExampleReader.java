@@ -4,11 +4,10 @@ import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import jsystem.framework.sut.SutReader;
-import jsystem.utils.XmlUtils;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import jsystem.utils.XmlUtils;
 
 /**
  * A SutReader example implementation with a simple manipulation, adding an attribute to all

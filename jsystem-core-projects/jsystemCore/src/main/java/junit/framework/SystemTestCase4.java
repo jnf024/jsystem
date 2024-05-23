@@ -4,7 +4,10 @@
 package junit.framework;
 
 import java.util.HashMap;
-import java.util.Map;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.runner.RunWith;
 
 import jsystem.extensions.handlers.UIEventHandler;
 import jsystem.extensions.handlers.ValidationHandler;
@@ -12,10 +15,6 @@ import jsystem.framework.ShutdownManager;
 import jsystem.framework.analyzer.AnalyzerImpl;
 import jsystem.framework.scenario.Parameter;
 import jsystem.framework.scenario.ValidationError;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.runner.RunWith;
 
 @RunWith(JSystemJUnit4ClassRunner.class)
 public class SystemTestCase4 extends SystemTestCaseImpl implements SystemTest, UIEventHandler, ValidationHandler {

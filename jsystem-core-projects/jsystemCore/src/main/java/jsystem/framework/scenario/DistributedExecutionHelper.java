@@ -45,9 +45,9 @@ public class DistributedExecutionHelper {
 	public static DistributedExecutionPlugin getPlugin() throws Exception{
 		String pluginClass = JSystemProperties.getInstance().getPreference(FrameworkOptions.DISTRIBUTED_EXECUTION_PLUGIN);
 		if (StringUtils.isEmpty(pluginClass)){
-			return (DistributedExecutionPlugin)Class.forName("jsystem.runner.agent.clients.DefaultDistributedExecutionPlugin").newInstance();
+			return (DistributedExecutionPlugin)Class.forName("jsystem.runner.agent.clients.DefaultDistributedExecutionPlugin").getDeclaredConstructor().newInstance();
 		}
-		return (DistributedExecutionPlugin)Class.forName(pluginClass).newInstance();
+		return (DistributedExecutionPlugin)Class.forName(pluginClass).getDeclaredConstructor().newInstance();
 	}
 
 	/**

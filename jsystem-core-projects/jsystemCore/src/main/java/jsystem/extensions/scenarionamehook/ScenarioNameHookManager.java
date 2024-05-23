@@ -32,7 +32,7 @@ public class ScenarioNameHookManager {
 		}
 		
 		Object nameHook = 
-			LoadersManager.getInstance().getLoader().loadClass(className).newInstance();
+			LoadersManager.getInstance().getLoader().loadClass(className).getDeclaredConstructor().newInstance();
 		
 		if (!(nameHook instanceof ScenarioNameHook)){
 			throw new Exception("Scenario name hook must be an instance of ScenarioNameHook interface");
