@@ -11,18 +11,19 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.thoughtworks.qdox.JavaProjectBuilder;
+import com.thoughtworks.qdox.model.DocletTag;
+import com.thoughtworks.qdox.model.JavaClass;
+import com.thoughtworks.qdox.model.JavaMethod;
 
 import jsystem.framework.FrameworkOptions;
 import jsystem.framework.JSystemProperties;
 import jsystem.runner.loader.LoadersManager;
 import jsystem.utils.FileUtils;
-
-import com.thoughtworks.qdox.JavaDocBuilder;
-import com.thoughtworks.qdox.model.DocletTag;
-import com.thoughtworks.qdox.model.JavaClass;
-import com.thoughtworks.qdox.model.JavaMethod;
 
 /**
  * This class give general code base services.
@@ -59,7 +60,7 @@ public class HtmlCodeWriter {
 	/**
 	 * Contain all the sources to parse.
 	 */
-	JavaDocBuilder docBuilder = null;
+	JavaProjectBuilder docBuilder = null;
 	File srcDir;
 	
 	/**
@@ -101,7 +102,7 @@ public class HtmlCodeWriter {
 			}
 		}
 		srcDir = new File(testsSourceFolder);
-		docBuilder = new JavaDocBuilder();
+		docBuilder = new JavaProjectBuilder();
 		filesTime = new HashMap<File, Long>();
 	}
 	public void close (){
@@ -185,7 +186,7 @@ public class HtmlCodeWriter {
 		if(cls == null){
 			return null;
 		}
-		JavaMethod[] methods = cls.getMethods();
+		List<JavaMethod> methods = cls.getMethods();
 		for(JavaMethod method: methods){
 			if(method.getName().equals(methodName)){
 				return method.getComment();
@@ -207,7 +208,7 @@ public class HtmlCodeWriter {
 		if(cls == null){
 			return null;
 		}
-		JavaMethod[] methods = cls.getMethods();
+		List<JavaMethod> methods = cls.getMethods();
 		for(JavaMethod method: methods){
 			if(method.getName().equals(methodName)){
 				DocletTag tag = method.getTagByName(annotation);
