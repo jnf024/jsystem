@@ -22,8 +22,8 @@ del .run.properties
 
 ::add modules(xml.bind/java.desktop) in case running on java 9+ version
 set ADD_MODULES_STR=
-for /f tokens^=2-5^ delims^=.-_^" %%j in ('java -fullversion 2^>^&1') do set "jver=%%j"
-if %jver% NEQ 1 set ADD_MODULES_STR=--add-modules java.xml.bind --add-modules java.desktop
+::for /f tokens^=2-5^ delims^=.-_^" %%j in ('java -fullversion 2^>^&1') do set "jver=%%j"
+::if %jver% NEQ 1 set ADD_MODULES_STR=--add-modules java.xml.bind --add-modules java.desktop
 
 
 set ANT_HOME=thirdparty\ant

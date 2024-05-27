@@ -8,41 +8,25 @@ import java.security.Security;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import jakarta.activation.DataHandler;
-//import javax.activation.DataSource;
-//import javax.activation.FileDataSource;
-//import javax.mail.Flags;
-//import javax.mail.Folder;
-//import javax.mail.Message;
-//import javax.mail.Multipart;
-//import javax.mail.PasswordAuthentication;
-//import javax.mail.Session;
-//import javax.mail.Store;
-//import javax.mail.Transport;
-//import javax.mail.internet.AddressException;
-//import javax.mail.internet.InternetAddress;
-//import javax.mail.internet.MimeBodyPart;
-//import javax.mail.internet.MimeMessage;
-//import javax.mail.internet.MimeMultipart;
-//import javax.mail.search.FromTerm;
-//import javax.mail.search.SubjectTerm;
-import jakarta.activation.DataSource;
-import jakarta.activation.FileDataSource;
-import jakarta.mail.Flags;
-import jakarta.mail.Folder;
-import jakarta.mail.Message;
-import jakarta.mail.Multipart;
-import jakarta.mail.PasswordAuthentication;
-import jakarta.mail.Session;
-import jakarta.mail.Store;
-import jakarta.mail.Transport;
-import jakarta.mail.internet.AddressException;
-import jakarta.mail.internet.InternetAddress;
-import jakarta.mail.internet.MimeBodyPart;
-import jakarta.mail.internet.MimeMessage;
-import jakarta.mail.internet.MimeMultipart;
-import jakarta.mail.search.FromTerm;
-import jakarta.mail.search.SubjectTerm;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.Flags;
+import javax.mail.Folder;
+import javax.mail.Message;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Store;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import javax.mail.search.FromTerm;
+import javax.mail.search.SubjectTerm;
+
 import jsystem.framework.system.SystemObjectImpl;
 
 /**
@@ -196,7 +180,7 @@ public class MailUtil extends SystemObjectImpl{
 		
 		if (password != null) {
 			props.put("mail.smtp.auth", "true");
-			session = Session.getInstance(props, new jakarta.mail.Authenticator() {
+			session = Session.getInstance(props, new javax.mail.Authenticator() {
 
 				protected PasswordAuthentication getPasswordAuthentication() {
 					return new PasswordAuthentication(userName, password);
@@ -359,7 +343,7 @@ public class MailUtil extends SystemObjectImpl{
 		
         
 		// Get session
-		Session session = Session.getInstance(props, new jakarta.mail.Authenticator() {
+		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication(userName, password);

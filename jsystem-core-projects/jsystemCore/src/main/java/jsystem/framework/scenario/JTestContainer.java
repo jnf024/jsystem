@@ -13,7 +13,7 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import jakarta.mail.MethodNotSupportedException;
+import javax.mail.MethodNotSupportedException;
 
 import jsystem.framework.scenario.UpgradeAndBackwardCompatibility.AntElement;
 import jsystem.framework.scenario.UpgradeAndBackwardCompatibility.Version;

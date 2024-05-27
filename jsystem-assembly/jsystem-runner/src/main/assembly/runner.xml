@@ -97,6 +97,7 @@
 				<include>*:servlet-api:*</include>
 				<include>*:spring:*</include>
 				<include>*:xalan:*</include>
+				<include>*:serializer:*</include>
 				<include>*:xml-apis:*</include>
 				<include>*:activation:*</include>
 				<include>*:cli:*</include>
@@ -132,7 +133,6 @@
 				<include>*:jaxb-impl:*</include>
 				<include>*:jakarta.activation-api:*</include>
 				<include>*:jakarta.xml.bind-api:*</include>
-				<include>*:jakarta.mail-api:*</include>
 			</includes>
 		</dependencySet>
 		<dependencySet>

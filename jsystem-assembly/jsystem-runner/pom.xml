@@ -19,8 +19,8 @@
 			<type>zip</type>
 		</dependency>
 		<dependency>
-			<groupId>jakarta.mail</groupId>
-			<artifactId>jakarta.mail-api</artifactId>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
 		</dependency>
 <!--		<dependency>
 			<groupId>commons-httpclient</groupId>
@@ -38,7 +38,12 @@
 			<groupId>xalan</groupId>
 			<artifactId>xalan</artifactId>
 		</dependency>
-
+		<!-- https://mvnrepository.com/artifact/xalan/serializer -->
+		<dependency>
+		    <groupId>xalan</groupId>
+		    <artifactId>serializer</artifactId>
+		</dependency>
+		
 		<dependency>
 			<groupId>jython</groupId>
 			<artifactId>jython</artifactId>
