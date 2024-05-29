@@ -58,11 +58,6 @@
 				<artifactId>ant</artifactId>
 				<version>1.7.0</version>
 			</dependency>
-		<!--	<dependency>
-				<groupId>commons-httpclient</groupId>
-				<artifactId>commons-httpclient</artifactId>
-				<version>3.0.1</version>
-			</dependency>-->
 			<dependency>
 			    <groupId>org.apache.httpcomponents</groupId>
 			    <artifactId>httpclient</artifactId>
@@ -94,17 +89,11 @@
 				<artifactId>jython</artifactId>
 				<version>2.1</version>
 			</dependency>
-<!--			<dependency>
+			<dependency>
 				<groupId>jfree</groupId>
 				<artifactId>jfreechart</artifactId>
 				<version>1.0.13</version>
-			</dependency>-->
-			<dependency>
-			    <groupId>org.jfree</groupId>
-			    <artifactId>jfreechart</artifactId>
-			    <version>1.5.4</version>
 			</dependency>
-
 			<dependency>
 				<groupId>commons-jxpath</groupId>
 				<artifactId>commons-jxpath</artifactId>
@@ -115,21 +104,11 @@
 				<artifactId>asm</artifactId>
 				<version>2.2.3</version>
 			</dependency>
-<!--			<dependency>
-			    <groupId>org.ow2.asm</groupId>
-			    <artifactId>asm</artifactId>
-			    <version>9.7</version>
-			</dependency>-->
 			<dependency>
 				<groupId>asm</groupId>
 				<artifactId>asm-commons</artifactId>
 				<version>2.2.3</version>
 			</dependency>
-<!--			<dependency>
-			    <groupId>org.ow2.asm</groupId>
-			    <artifactId>asm-commons</artifactId>
-			    <version>9.7</version>
-			</dependency>-->
 			<dependency>
 				<groupId>ant-contrib</groupId>
 				<artifactId>ant-contrib</artifactId>
@@ -201,7 +180,7 @@
 			<dependency>
 				<groupId>com.thoughtworks.qdox</groupId>
 				<artifactId>qdox</artifactId>
-				<version>2.1.0</version>
+				<version>1.9.2</version>
 			</dependency>
 			<dependency>
 				<groupId>net.javaprog.jwizz</groupId>
@@ -254,6 +233,11 @@
 			    <artifactId>jakarta.xml.bind-api</artifactId>
 			    <version>4.0.2</version>
 			</dependency>
+			<dependency>
+			    <groupId>javax.management</groupId>
+			    <artifactId>jmx</artifactId>
+			    <version>1.2.1</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<build>
@@ -286,8 +270,8 @@
 		<module>../jsystem-core-system-objects</module>
 		<module>../jsystem-archetypes</module>
 		<module>../jsystem-miscellaneous/jsystem-maven-plugin</module>
-<!--		<module>../jsystem-miscellaneous/jsystem-services-so</module>
-		<module>../jsystem-miscellaneous/jsystem-services-tests</module>-->
+		<module>../jsystem-miscellaneous/jsystem-services-so</module>
+		<module>../jsystem-miscellaneous/jsystem-services-tests</module>
 	</modules>
 	<repositories>
 		<repository>

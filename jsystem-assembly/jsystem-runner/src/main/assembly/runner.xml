@@ -82,7 +82,9 @@
 				<include>*:asm-tree:*</include>
 				<include>*:avalon-framework:*</include>
 				<include>*:commons-codec:*</include>
-				<include>*:commons-httpclient:*</include>
+				<include>*:httpclient:*</include>
+				<include>*:httpcore:*</include>
+				<include>*:httpmime:*</include>
 				<include>*:commons-jxpath:*</include>
 				<include>*:hamcrest-core:*</include>
 				<include>*:jcommon:*</include>

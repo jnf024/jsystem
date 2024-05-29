@@ -14,9 +14,12 @@ import java.util.Iterator;
 
 import javax.xml.transform.TransformerException;
 
+import jsystem.framework.report.Reporter;
+import junit.framework.SystemTestCase;
+
 import org.apache.xpath.XPathAPI;
 import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartUtils;
+import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.NumberTickUnit;
@@ -32,9 +35,6 @@ import org.jfree.data.xy.XYSeriesCollection;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Text;
-
-import jsystem.framework.report.Reporter;
-import junit.framework.SystemTestCase;
 
 /**
  * @author guy.arieli
@@ -300,14 +300,14 @@ public class Graph {
 		}
 
 		XYItemRenderer renderer = new XYLineAndShapeRenderer(true, false);
-		renderer.setDefaultItemLabelFont(textFont);
-		renderer.setDefaultItemLabelFont(textFont);
+		renderer.setBaseItemLabelFont(textFont);
+		renderer.setItemLabelFont(textFont);
 		XYPlot plot = new XYPlot(dataset, xAxis, yAxis, renderer);
 		plot.setOrientation(PlotOrientation.VERTICAL);
-		renderer.setDefaultToolTipGenerator(new StandardXYToolTipGenerator());
+		renderer.setBaseToolTipGenerator(new StandardXYToolTipGenerator());
 		JFreeChart chart = new JFreeChart(name, textFont, plot, true);
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		ChartUtils.writeChartAsPNG(out, chart, 600, 450, false, 9);
+		ChartUtilities.writeChartAsPNG(out, chart, 600, 450, false, 9);
 		String file = graphName + "." + (System.currentTimeMillis() % 1000) + ".png";
 
 		reporter.saveFile(file, out.toByteArray());
@@ -324,7 +324,7 @@ public class Graph {
 		JFreeChart chart = ChartFactory.createXYLineChart(name, xAxiesName, yAxiesName, dataset,
 				PlotOrientation.VERTICAL, true, true, false);
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		ChartUtils.writeChartAsPNG(out, chart, 600, 450);
+		ChartUtilities.writeChartAsPNG(out, chart, 600, 450);
 
 		return out.toByteArray();
 	}

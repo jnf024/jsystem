@@ -7,13 +7,13 @@ package jsystem.framework.graph;
 
 import java.io.ByteArrayOutputStream;
 
+import jsystem.framework.report.Reporter;
+
 import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartUtils;
+import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
-
-import jsystem.framework.report.Reporter;
 
 /**
  * @author guy.arieli
@@ -71,7 +71,7 @@ public class BarGraph {
 		JFreeChart chart = ChartFactory.createBarChart(name, xAxiesName, yAxiesName, dataset, PlotOrientation.VERTICAL,
 				true, true, false);
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		ChartUtils.writeChartAsPNG(out, chart, width, length);
+		ChartUtilities.writeChartAsPNG(out, chart, width, length);
 
 		String file = Long.toString(System.currentTimeMillis()) + ".png";
 		reporter.saveFile(file, out.toByteArray());

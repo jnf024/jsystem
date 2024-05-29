@@ -231,7 +231,7 @@ public class AgentsDialog extends JDialog {
 	}
 
 	class AgentListTableModel extends DefaultTableModel {
-		AgentListTableModel(Vector<Object> model, Vector<String> columns) {
+		AgentListTableModel(Vector model, Vector<String> columns) {
 			super(model, columns);
 		}
 

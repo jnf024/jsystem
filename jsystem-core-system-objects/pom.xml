@@ -15,11 +15,11 @@
 	</properties>
 	<modules>
 		<module>cli-so</module>
-<!--		<module>cli-tests</module>-->
-<!--		<module>embeddedCatalina-so</module>
-		<module>embeddedCatalina-tests</module>-->
+		<module>cli-tests</module>
+		<module>embeddedCatalina-so</module>
+		<module>embeddedCatalina-tests</module>
 		<module>FileTransfer-so</module>		
-<!--		<module>FileTransfer-tests</module>-->
+		<module>FileTransfer-tests</module>
 	</modules>
 	
 </project>

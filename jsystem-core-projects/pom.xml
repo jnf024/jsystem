@@ -18,7 +18,7 @@
 		<module>jsystemCommon</module>
 		<module>jsystemAnt</module>
 		<module>jsystemAgent</module>
-		<!-- <module>jsystemApp</module> -->
+		<module>jsystemApp</module>
 	</modules>
 	
 </project>

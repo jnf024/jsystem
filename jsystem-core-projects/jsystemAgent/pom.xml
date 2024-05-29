@@ -18,6 +18,17 @@
 			<groupId>org.jsystemtest.systemobjects</groupId>
 			<artifactId>FileTransfer</artifactId>
 			<version>${project.version}</version>
-		</dependency>	
+		</dependency>
+		<dependency>
+			<groupId>org.jsystemtest.systemobjects</groupId>
+			<artifactId>embeddedCatalina</artifactId>
+			<version>${project.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>mx4j</groupId>
+					<artifactId>mx4j-jmx</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 	</dependencies>
 </project>

@@ -132,7 +132,7 @@ public class AgentsSelectionDialog extends JDialog {
 	class AgentSelectTableModel extends DefaultTableModel {
 		private static final long serialVersionUID = 1L;
 
-		AgentSelectTableModel(Vector<Object> model, Vector<String> columns) {
+		AgentSelectTableModel(Vector model, Vector<String> columns) {
 			super(model, columns);
 		}
 
